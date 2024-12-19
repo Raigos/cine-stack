@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@eslint/eslintrc':
+        specifier: ^3.2.0
+        version: 3.2.0
+      typescript-eslint:
+        specifier: ^8.18.1
+        version: 8.18.1(eslint@9.17.0)(typescript@5.6.2)
     devDependencies:
       '@eslint/js':
         specifier: ^9.17.0
@@ -3131,6 +3138,13 @@ packages:
 
   typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
+
+  typescript-eslint@8.18.1:
+    resolution: {integrity: sha512-Mlaw6yxuaDEPQvb/2Qwu3/TfgeBHy9iTJ3mTwe7OvpPmF6KPQjVOfGyEJpPv6Ez2C34OODChhXrzYw/9phI0MQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0
+      typescript: '>=4.8.4 <5.8.0'
 
   typescript@5.6.2:
     resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
@@ -6695,6 +6709,16 @@ snapshots:
       mime-types: 2.1.35
 
   typedarray@0.0.6: {}
+
+  typescript-eslint@8.18.1(eslint@9.17.0)(typescript@5.6.2):
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 8.18.1(@typescript-eslint/parser@8.18.1(eslint@9.17.0)(typescript@5.6.2))(eslint@9.17.0)(typescript@5.6.2)
+      '@typescript-eslint/parser': 8.18.1(eslint@9.17.0)(typescript@5.6.2)
+      '@typescript-eslint/utils': 8.18.1(eslint@9.17.0)(typescript@5.6.2)
+      eslint: 9.17.0
+      typescript: 5.6.2
+    transitivePeerDependencies:
+      - supports-color
 
   typescript@5.6.2: {}
 

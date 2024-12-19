@@ -6,6 +6,7 @@
   "private": true,
   "author": "Raigo Tuulik",
   "license": "CC-BY-NC-4.0",
+  "type": "module",
   "engines": {
     "node": ">=22.12.x"
   },

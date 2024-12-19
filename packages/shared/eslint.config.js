@@ -1,26 +1,23 @@
-export default {
-  root: true,
-  "files": ["*.js", "*.ts",],
-  env: {
-    es2022: true,
-    node: true
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'prettier'
-  ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 'latest',
+import js from '@eslint/js'
+import tseslint from 'typescript-eslint'
+import prettier from 'eslint-config-prettier'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+export default tseslint.config(js.configs.recommended, ...tseslint.configs.recommended, prettier, {
+  ignores: ['dist', 'build', '*.config.js', '*.config.ts'],
+  files: ['**/*.ts'],
+  languageOptions: {
+    ecmaVersion: 2022,
     sourceType: 'module',
-    project: './tsconfig.json',
-    tsconfigRootDir: __dirname,
+    parserOptions: {
+      project: './tsconfig.json',
+      tsconfigRootDir: __dirname,
+    },
   },
-  plugins: [
-    '@typescript-eslint'
-  ],
   rules: {
     // Strict type checking
     '@typescript-eslint/no-explicit-any': 'error',
@@ -31,7 +28,6 @@ export default {
 
     // General
     'no-console': 'error',
-    'eqeqeq': ['error', 'always'],
+    eqeqeq: ['error', 'always'],
   },
-  ignorePatterns: ['dist', 'build', '*.config.js', '*.config.ts']
-};
+})

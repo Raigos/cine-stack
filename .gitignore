@@ -50,4 +50,4 @@ pnpm-debug.log*
 Thumbs.db
 
 # Docs
-/docs/*
+/docs/*.pdf

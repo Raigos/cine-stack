@@ -1,0 +1,20 @@
+{
+  "name": "@cine-stack/wrapper",
+  "version": "1.0.0",
+  "description": "Backend service wrapper providing movie data and search functionality for the cinema management frontend.",
+  "main": "index.js",
+  "private": "true",
+  "author": "Raigo Tuulik",
+  "license": "CC-BY-NC-4.0",
+  "engines": {
+    "node": ">=22.12.x"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@cine-stack/shared": "workspace:^"
+  }
+
+}

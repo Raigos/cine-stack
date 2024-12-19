@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  client:
+    build:
+      context: .
+      dockerfile: apps/client/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/client/node_modules
+
+  wrapper:
+    build:
+      context: .
+      dockerfile: apps/wrapper/Dockerfile
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/wrapper/node_modules

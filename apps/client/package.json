@@ -1,0 +1,23 @@
+{
+  "name": "cine-stack/client",
+  "version": "1.0.0",
+  "description": "Frontend web application for cinema management, allowing users to list movies by number and search by title.",
+  "main": "index.js",
+  "private": "true",
+  "author": "Raigo Tuulik",
+  "license": "CC-BY-NC-4.0",
+  "engines": {
+    "node": ">=22.12.x"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@cine-stack/shared": "workspace:^"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.1.0"
+  }
+}

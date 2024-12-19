@@ -1,0 +1,50 @@
+# Dependencies
+node_modules
+.pnpm-store/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build outputs
+dist/
+build/
+lib/
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage/
+.nyc_output/
+cypress/videos/
+cypress/screenshots/
+
+# Debug logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Cache directories
+.cache/
+.next/
+.nuxt/
+.vite/
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db

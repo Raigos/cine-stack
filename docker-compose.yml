@@ -1,23 +1,16 @@
-version: '3.8'
 services:
-  client:
+  frontend:
     build:
-      context: .
-      dockerfile: apps/client/Dockerfile
+      context: ./apps/client
+      dockerfile: Dockerfile
     ports:
       - "5173:5173"
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/apps/client/node_modules
+    depends_on:
+      - backend
 
-  wrapper:
+  backend:
     build:
-      context: .
-      dockerfile: apps/wrapper/Dockerfile
+      context: ./apps/wrapper
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/apps/wrapper/node_modules

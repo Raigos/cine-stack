@@ -16,7 +16,8 @@
   },
   "scripts": {
     "// Development": "",
-    "dev": "pnpm --filter @cine-stack/client dev",
+    "dev:all": "pnpm run pnpm run dev:wrapper & dev:client",
+    "dev:client": "pnpm --filter @cine-stack/client dev",
     "dev:wrapper": "pnpm --filter @cine-stack/wrapper start:dev",
     "dev:debug": "pnpm --filter @cine-stack/wrapper start:debug",
     "preview": "pnpm --filter @cine-stack/client preview",
@@ -35,7 +36,11 @@
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix",
     "format": "pnpm -r format",
-    "prepare": "husky"
+    "prepare": "husky",
+    "// Docker": "",
+    "docker:up": "docker compose up",
+    "docker:down": "docker compose down",
+    "docker:build": "docker compose build"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

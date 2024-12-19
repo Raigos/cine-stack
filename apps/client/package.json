@@ -1,5 +1,5 @@
 {
-  "name": "cine-stack/client",
+  "name": "@cine-stack/client",
   "version": "1.0.0",
   "description": "Frontend web application for cinema management, allowing users to list movies by number and search by title.",
   "main": "index.js",
@@ -9,15 +9,29 @@
   "engines": {
     "node": ">=22.12.x"
   },
+  "type": "module",
   "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@cine-stack/shared": "workspace:^"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^5.1.0"
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.13.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.1",
+    "vite": "^6.0.3"
   }
 }

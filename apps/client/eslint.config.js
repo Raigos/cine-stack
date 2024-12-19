@@ -1,39 +1,28 @@
-export default {
-  root: true,
-  "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
-  env: {
-    browser: true,
-    es2022: true,
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+
+export default tseslint.config(
+  { ignores: ['dist'] },
+  {
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'prettier'
-  ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: './tsconfig.json',
-    tsconfigRootDir: __dirname,
-  },
-  plugins: [
-    'react',
-    'react-hooks',
-    '@typescript-eslint'
-  ],
-  rules: {
-    'react/react-in-jsx-scope': 'off',  // Not needed in React 17+
-    'react/prop-types': 'off',          // We're using TypeScript instead
-    'no-console': 'warn',
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-  },
-  settings: {
-    react: {
-      version: 'detect'
-    }
-  },
-  ignorePatterns: ['dist', 'build', '*.config.js', '*.config.ts']
-};
+)

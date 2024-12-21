@@ -12,6 +12,9 @@
 - Using Material-UI for styling, despite its overhead, to meet project bonus points, I would have used shadUI
 - Added the eslint, prettier, .editorconfig for consistency
 - I added `husky` and `lint-staged` so that the code lints and prettier before commiting automatically for consistency
+- I added the light and dark theme because I was looking into it the day before I received the test task and wanted to
+  try it out
+- After the setup is done, I will continue working on the wrapper
 
 ## Project Structure
 

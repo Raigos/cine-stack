@@ -16,7 +16,6 @@ COPY vite.config.ts ./
   
   # Copy project files
 COPY src/ ./src/
-COPY public/ ./public/
 
   # Install dependencies
 RUN pnpm install

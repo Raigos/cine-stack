@@ -14,7 +14,6 @@ COPY tsconfig.json ./
   
   # Copy source code and tests
 COPY src/ ./src/
-COPY test/ ./test/
 
   # Install dependencies
 RUN pnpm install

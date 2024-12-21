@@ -44,16 +44,16 @@ docker compose up
 
 - Node.js: `22.12.0` (recommended)
 - pnpm: `9.15.0` (recommended)
+- A valid TMDB API access token
+### Local Development Setup
 
-```bash
-# Check your Node version
-node --version
+Create a `.env` file in the root directory with the following content:
+```env
+TMDB_ACCESS_TOKEN=your_access_token_here
+TMDB_BASE_URL=https://api.themoviedb.org/3
+WRAPPER_PORT=3000
 ```
 
-```bash
-# Check your Node version
-node --version
-```
 
 ### Local Development Setup
 

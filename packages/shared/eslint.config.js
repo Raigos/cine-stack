@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export default tseslint.config(js.configs.recommended, ...tseslint.configs.recommended, prettier, {
-  ignores: ['dist', 'build', '*.config.js', '*.config.ts'],
+  ignores: ['**/dist/**', '**/build/**', '*.config.js', '*.config.ts'],
   files: ['**/*.ts'],
   languageOptions: {
     ecmaVersion: 2022,

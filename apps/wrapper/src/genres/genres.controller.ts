@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common'
 import { GenresService } from './genres.service'
-import { GenreNames } from '../types'
+import { GenreNames } from '@cine-stack/shared/src'
 
 @Controller('genres')
 export class GenresController {

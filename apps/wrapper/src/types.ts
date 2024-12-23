@@ -110,13 +110,7 @@ export interface EnrichedMovieResponse extends Omit<TMDBMovieResponse, 'results'
   results: MovieWithGenres[]
 }
 
-export interface Genre {
-  id: number
-  name: string
-}
 
-export type GenreNames = Genre['name'][];
 
-export interface GenreResponse {
-  genres: Genre[]
-}
+
+

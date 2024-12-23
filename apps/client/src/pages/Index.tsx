@@ -2,7 +2,8 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
-import ProTip from '../components/ProTip'
+import ProTip from '@/components/ProTip'
+import { GenreSelector } from '@/components/GenreSelector'
 
 function Copyright() {
   return (
@@ -36,6 +37,8 @@ export default function Index() {
         >
           Material UI Vite.js example in TypeScript
         </Typography>
+
+        <GenreSelector />
         <ProTip />
         <Copyright />
       </Box>

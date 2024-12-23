@@ -3,9 +3,10 @@ import { ConfigService } from '@nestjs/config'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import { Cache } from 'cache-manager'
 import { HttpService } from '@nestjs/axios'
-import { Genre, GenreResponse, Movie, MovieWithGenres, GenreNames } from '../types'
+import {Movie, MovieWithGenres } from '../types'
 import { firstValueFrom } from 'rxjs'
 import { AxiosResponse } from 'axios'
+import { Genre, GenreResponse, GenreNames } from '@cine-stack/shared/src/'
 
 @Injectable()
 export class GenresService {
@@ -42,17 +43,17 @@ export class GenresService {
   }
 
   async getAllGenres(): Promise<GenreNames> {
-    const cachedNames = await this.cacheManager.get<GenreNames>('genre_names');
+    const cachedNames = await this.cacheManager.get<GenreNames>('genre_names')
     if (cachedNames) {
-      return cachedNames;
+      return cachedNames
     }
 
-    const genres = await this.getAllGenresInternal();
-    const genreNames = genres.map(genre => genre.name);
+    const genres = await this.getAllGenresInternal()
+    const genreNames = genres.map(genre => genre.name)
 
-    await this.cacheManager.set('genre_names', genreNames);
+    await this.cacheManager.set('genre_names', genreNames)
 
-    return genreNames;
+    return genreNames
   }
 
   async mapGenreIdsToNames(movies: Movie[]): Promise<MovieWithGenres[]> {

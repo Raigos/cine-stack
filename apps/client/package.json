@@ -24,11 +24,14 @@
     "@fontsource/roboto": "^5.1.0",
     "@mui/icons-material": "^6.2.1",
     "@mui/material": "^6.2.1",
+    "@reduxjs/toolkit": "^2.5.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.0.2"
   },
   "devDependencies": {
+    "@cine-stack/shared": "workspace:*",
     "@types/react": "18.3.17",
     "@types/react-dom": "18.3.5",
     "@vitejs/plugin-react": "^4.3.4",

@@ -1,7 +1,7 @@
-
 {
   "compilerOptions": {
-    "composite": true
+    "declaration": false,
+    "noEmit": true
   },
   "files": [],
   "references": [

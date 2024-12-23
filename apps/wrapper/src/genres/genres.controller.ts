@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common'
 import { GenresService } from './genres.service'
-import { Genre } from '../types'
+import { GenreNames } from '../types'
 
 @Controller('genres')
 export class GenresController {
@@ -8,7 +8,7 @@ export class GenresController {
 
   // Get all genres with name
   @Get()
-  async getGenres(): Promise<Genre[]> {
+  async getGenres(): Promise<GenreNames> {
     return this.genresService.getAllGenres()
   }
 }

@@ -22,7 +22,6 @@ export class MoviesController {
   // Search my title
   @Get('search')
   async searchMovies(@Query('query') query: string, @Query() otherParams: MovieSearchBaseParams): Promise<EnrichedMovieResponse> {
-
     if (!query) {
       throw new BadRequestException('Query parameter is required')
     }

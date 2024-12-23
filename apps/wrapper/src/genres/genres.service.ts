@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import { Cache } from 'cache-manager'
 import { HttpService } from '@nestjs/axios'
-import { Genre, GenreResponse, Movie, MovieWithGenres } from '../types'
+import { Genre, GenreResponse, Movie, MovieWithGenres, GenreNames } from '../types'
 import { firstValueFrom } from 'rxjs'
 import { AxiosResponse } from 'axios'
 
@@ -23,14 +23,14 @@ export class GenresService {
     return this.configService.get<string>('tmdb.accessToken')
   }
 
-  async getAllGenres(): Promise<Genre[]> {
+  private async getAllGenresInternal(): Promise<Genre[]> {
     const cachedData = await this.cacheManager.get<Genre[]>('all_genres')
     if (cachedData) {
       return cachedData
     }
 
     const response: AxiosResponse<GenreResponse> = await firstValueFrom(
-      this.httpService.get<{ genres: Genre[] }>(`${this.tmdbBaseUrl}/genre/movie/list`, {
+      this.httpService.get<GenreResponse>(`${this.tmdbBaseUrl}/genre/movie/list`, {
         headers: {
           Authorization: `Bearer ${this.tmdbAccessToken}`,
         },
@@ -41,8 +41,22 @@ export class GenresService {
     return response.data.genres
   }
 
+  async getAllGenres(): Promise<GenreNames> {
+    const cachedNames = await this.cacheManager.get<GenreNames>('genre_names');
+    if (cachedNames) {
+      return cachedNames;
+    }
+
+    const genres = await this.getAllGenresInternal();
+    const genreNames = genres.map(genre => genre.name);
+
+    await this.cacheManager.set('genre_names', genreNames);
+
+    return genreNames;
+  }
+
   async mapGenreIdsToNames(movies: Movie[]): Promise<MovieWithGenres[]> {
-    const genres: Genre[] = await this.getAllGenres()
+    const genres = await this.getAllGenresInternal()
 
     const genreMap = genres.reduce(
       (map, genre) => {

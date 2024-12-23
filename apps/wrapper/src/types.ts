@@ -115,11 +115,8 @@ export interface Genre {
   name: string
 }
 
+export type GenreNames = Genre['name'][];
+
 export interface GenreResponse {
   genres: Genre[]
-}
-
-export interface GenreCache {
-  data: Genre[]
-  timestamp: number
 }

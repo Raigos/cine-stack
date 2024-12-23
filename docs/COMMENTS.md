@@ -17,7 +17,11 @@
 - After the setup is done, I will continue working on the wrapper
 - After re-reading the task, I will not be using graphQL since the task explicitly says "Rest api service based on node", using it might show initiative but it can also show that I don't follow instructions carefully. Better be cautious
 - After that, I will go through the nest.js documentation to refreshen my memory
-- I think I finished with the wrapper next up the client
+- I think I finished with the wrapper next up the client, I should have added swagger for self documenting endpoints.. oh well maybe after the client
+- I got home late and didn't want to work on the client yet, but I decided to take a look at the wrapper to see if I could find some problems and indeed I did
+- I made sure to use postman before working on the client to make sure all the responses are  working
+- 
+- 
 
 ## Project Structure
 

@@ -2,12 +2,17 @@ import { Injectable } from '@nestjs/common'
 import { HttpService } from '@nestjs/axios'
 import { ConfigService } from '@nestjs/config'
 import { firstValueFrom } from 'rxjs'
-import { MovieResponse, MovieDiscoverParams, MovieSearchParams } from '../types'
+import { TMDBMovieResponse, MovieDiscoverParams, MovieSearchParams, EnrichedMovieResponse, DefaultMovieParams } from '../types'
 import { GenresService } from '../genres/genres.service'
+
+const DEFAULT_PARAMS: DefaultMovieParams = {
+  language: 'en-US',
+  page: 1,
+  include_adult: false,
+} as const
 
 @Injectable()
 export class MoviesService {
-  // We inject ConfigService alongside our other dependencies
   constructor(
     private readonly httpService: HttpService,
     private readonly genresService: GenresService,
@@ -22,20 +27,14 @@ export class MoviesService {
     return this.configService.get<string>('tmdb.accessToken')
   }
 
-  async getMovies(params: Partial<MovieDiscoverParams> = {}): Promise<MovieResponse> {
-    const defaultParams: Partial<MovieDiscoverParams> = {
-      include_adult: false,
-      language: 'en-US',
-      page: 1,
-    }
-
+  async getMovies(params: MovieDiscoverParams = {}): Promise<EnrichedMovieResponse> {
     const response = await firstValueFrom(
-      this.httpService.get<MovieResponse>(`${this.tmdbBaseUrl}/discover/movie`, {
+      this.httpService.get<TMDBMovieResponse>(`${this.tmdbBaseUrl}/discover/movie`, {
         headers: {
           accept: 'application/json',
           Authorization: `Bearer ${this.tmdbAccessToken}`,
         },
-        params: { ...defaultParams, ...params },
+        params: { ...DEFAULT_PARAMS, ...params },
       }),
     )
 
@@ -49,33 +48,30 @@ export class MoviesService {
     }
   }
 
-  async searchMoviesByTitle(params: Partial<MovieSearchParams> = {}): Promise<MovieResponse> {
-    const defaultParams: Partial<MovieSearchParams> = {
-      include_adult: false,
-      language: 'en-US',
-      page: 1,
-    }
-
+  async searchMoviesByTitle(params: MovieSearchParams): Promise<EnrichedMovieResponse> {
     const response = await firstValueFrom(
-      this.httpService.get<MovieResponse>(`${this.tmdbBaseUrl}/search/movie`, {
+      this.httpService.get<TMDBMovieResponse>(`${this.tmdbBaseUrl}/search/movie`, {
         headers: {
           accept: 'application/json',
           Authorization: `Bearer ${this.tmdbAccessToken}`,
         },
-        params: { ...defaultParams, ...params },
+        params: { ...DEFAULT_PARAMS, ...params },
       }),
     )
+    const enrichedResults = await this.genresService.mapGenreIdsToNames(response.data.results)
 
-    return response.data
+    return {
+      page: response.data.page,
+      results: enrichedResults,
+      total_pages: response.data.total_pages,
+      total_results: response.data.total_results,
+    }
   }
 
-  // This method remains largely the same since it uses getMovies internally
-  async discoverMoviesByGenres(genres: number[]): Promise<MovieResponse> {
-    const params: Partial<MovieDiscoverParams> = {
+  async discoverMoviesByGenres(genres: number[]): Promise<EnrichedMovieResponse> {
+    const params: MovieDiscoverParams = {
       with_genres: genres.join(','),
-      include_adult: false,
-      language: 'en-US',
-      page: 1,
+      ...DEFAULT_PARAMS,
     }
 
     return this.getMovies(params)

@@ -35,7 +35,7 @@ export interface Movie {
   vote_count: number // Default: 0
 }
 
-export interface MovieResponse {
+export interface TMDBMovieResponse {
   page: number // Default: 0
   results: Movie[]
   total_pages: number // Default: 0
@@ -83,14 +83,31 @@ export interface MovieDiscoverParams {
   year?: number
 }
 
-export interface MovieSearchParams {
+export interface MovieSearchBaseParams {
+  include_adult?: boolean // Default: false
+  language?: string // Default: en-US
+  primary_release_year?: string
+  page?: number // Default: 1
+  region?: string
+  year?: string
+}
+
+export interface MovieSearchParams extends MovieSearchBaseParams {
   query: string
-  include_adult: boolean // Default: false
-  language: string // Default: en-US
-  primary_release_year: string
-  page: number // Default: 1
-  region: string
-  year: string
+}
+
+export interface DefaultMovieParams {
+  include_adult: boolean
+  language: string
+  page: number
+}
+
+export interface MovieWithGenres extends Omit<Movie, 'genre_ids'> {
+  genres: string[]
+}
+
+export interface EnrichedMovieResponse extends Omit<TMDBMovieResponse, 'results'> {
+  results: MovieWithGenres[]
 }
 
 export interface Genre {

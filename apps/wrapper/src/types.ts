@@ -109,8 +109,3 @@ export interface MovieWithGenres extends Omit<Movie, 'genre_ids'> {
 export interface EnrichedMovieResponse extends Omit<TMDBMovieResponse, 'results'> {
   results: MovieWithGenres[]
 }
-
-
-
-
-

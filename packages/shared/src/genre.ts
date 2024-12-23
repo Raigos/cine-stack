@@ -1,10 +1,10 @@
 export interface Genre {
-    id: number
-    name: string
+  id: number
+  name: string
 }
 
 export interface GenreResponse {
-    genres: Genre[]
+  genres: Genre[]
 }
 
 export type GenreNames = Genre['name'][]

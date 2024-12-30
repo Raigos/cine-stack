@@ -6,7 +6,7 @@ import { Typography, Pagination, Stack } from '@mui/material'
 import { MovieCard } from './Card'
 import { EmptyState } from './EmptyState'
 import { Logo } from './Logo'
-import { CardContainer, LogoContainer } from './styles/Result'
+import { CardContainer, LogoContainer } from './styles/ResultStyles'
 
 interface MovieResultsProps {
   onPageChange: (page: number) => void
@@ -16,7 +16,7 @@ interface MovieResultsProps {
 
 const DISPLAY_PER_PAGE = 5
 
-export function Results({ results, onPageChange, selectedGenres }: MovieResultsProps) {
+export function Results({ results, onPageChange, selectedGenres }: MovieResultsProps): React.ReactElement {
   const handlePageChange = (_event: React.ChangeEvent<unknown>, newPage: number) => {
     onPageChange(newPage)
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -27,7 +27,7 @@ export function Results({ results, onPageChange, selectedGenres }: MovieResultsP
   }
 
   const displayedMovies = results.results.slice(0, DISPLAY_PER_PAGE)
-    
+
   return (
     <CardContainer>
       <LogoContainer>

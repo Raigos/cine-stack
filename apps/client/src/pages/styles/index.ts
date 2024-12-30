@@ -5,7 +5,7 @@ import { SelectProps } from '@mui/material/Select'
 import { ColorModeSelect } from '@/components'
 
 type StyledColorModeSelectProps = SelectProps & {
-  className?: string;
+  className?: string
 }
 
 export const GridContainer = styled(Box)(({ theme }) => ({
@@ -58,8 +58,8 @@ export const MainStack = styled(Stack)(({ theme }) => ({
   },
 })) as typeof Stack
 
-export const StyledColorModeSelect = styled(ColorModeSelect)<StyledColorModeSelectProps>(({
+export const StyledColorModeSelect = styled(ColorModeSelect)<StyledColorModeSelectProps>({
   position: 'fixed',
   top: '1rem',
   right: '1rem',
-}))
+})

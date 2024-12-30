@@ -27,7 +27,7 @@ export function Results({ results, onPageChange, selectedGenres }: MovieResultsP
   }
 
   const displayedMovies = results.results.slice(0, DISPLAY_PER_PAGE)
-  console.log('HELLO', displayedMovies)
+    
   return (
     <CardContainer>
       <LogoContainer>

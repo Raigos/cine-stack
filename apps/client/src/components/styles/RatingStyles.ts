@@ -17,7 +17,7 @@ export const StyledStarIcon = styled(StarIcon)(({ theme }) => ({
 }))
 
 export const RatingText = styled(Typography)({
-  fontWeight: 500,
+  fontWeight: 700,
 })
 
 export const Dot = styled(Typography)(({ theme }) => ({

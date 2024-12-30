@@ -95,7 +95,7 @@ export const dataDisplayCustomizations: Components<Theme> = {
         border: '1px solid',
         borderRadius: '999px',
         [`& .${chipClasses.label}`]: {
-          fontWeight: 600,
+          fontWeight: 700,
         },
         variants: [
           {

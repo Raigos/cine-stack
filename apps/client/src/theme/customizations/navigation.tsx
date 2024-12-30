@@ -11,6 +11,7 @@ import { tabClasses } from '@mui/material/Tab'
 
 import { gray, brand } from '../themePrimitives'
 
+
 export const navigationCustomizations: Components<Theme> = {
   MuiMenuItem: {
     styleOverrides: {

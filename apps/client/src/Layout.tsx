@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom'
 
 import { Footer } from '@/components'
 
-
 const LayoutWrapper = styled(Box)({
   display: 'flex',
   minHeight: '100vh',

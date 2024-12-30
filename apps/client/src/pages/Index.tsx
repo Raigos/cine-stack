@@ -8,7 +8,6 @@ import { RootState } from '@/store/store'
 
 import { GridContainer, MainStack, StyledColorModeSelect } from './styles/index'
 
-
 export default function Index() {
   const dispatch = useDispatch()
   const { hasSearched, currentPage, selectedGenres, searchResults, shouldSearch } = useSelector((state: RootState) => state.movieSearch)

@@ -1,15 +1,18 @@
 import { styled } from '@mui/material'
-import { Container, Stack } from '@mui/material/'
+import { Box, Stack } from '@mui/material/'
+import { SelectProps } from '@mui/material/Select'
 
 import { ColorModeSelect } from '@/components'
 
+type StyledColorModeSelectProps = SelectProps & {
+  className?: string;
+}
 
-export const GridContainer = styled(Container)(({ theme }) => ({
+export const GridContainer = styled(Box)(({ theme }) => ({
   display: 'grid',
   position: 'relative',
   overflow: 'visible',
   gap: theme.spacing(4),
-  padding: theme.spacing(2),
   gridTemplateColumns: '1fr',
   '& > *:first-of-type': {
     gridRow: 2,
@@ -33,7 +36,7 @@ export const GridContainer = styled(Container)(({ theme }) => ({
       marginLeft: 0,
     },
   },
-}))
+})) as typeof Box
 
 export const MainStack = styled(Stack)(({ theme }) => ({
   justifyContent: 'center',
@@ -53,10 +56,10 @@ export const MainStack = styled(Stack)(({ theme }) => ({
       backgroundImage: 'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
     }),
   },
-}))
+})) as typeof Stack
 
-export const StyledColorModeSelect = styled(ColorModeSelect)({
+export const StyledColorModeSelect = styled(ColorModeSelect)<StyledColorModeSelectProps>(({
   position: 'fixed',
   top: '1rem',
   right: '1rem',
-})
+}))

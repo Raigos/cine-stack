@@ -4,7 +4,6 @@ import SignInSide from '@/pages/index'
 
 import Layout from './Layout'
 
-
 export const router = createBrowserRouter([
   {
     path: '/',

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+
 import { getInitialTheme, setTheme, subscribe, Theme, toggleTheme } from '@/theme/themeManager'
 
 export function useTheme() {

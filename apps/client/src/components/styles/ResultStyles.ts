@@ -7,15 +7,14 @@ export const CardContainer = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2),
   background: 'none',
   backgroundColor: 'transparent',
-}))
+})) as typeof Box
 
 export const LogoContainer = styled(Box)(({ theme }) => ({
   display: 'none',
-  marginBottom: theme.spacing(2),
   //align on the left side
   marginLeft: theme.spacing(-0.5),
 
   [theme.breakpoints.up('lg')]: {
     display: 'flex',
   },
-}))
+})) as typeof Box

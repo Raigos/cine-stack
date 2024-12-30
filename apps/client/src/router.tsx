@@ -1,6 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom'
+
+import SignInSide from '@/pages/index'
+
 import Layout from './Layout'
-import Index from './pages/Index'
+
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Index />,
+        element: <SignInSide />,
       },
     ],
   },

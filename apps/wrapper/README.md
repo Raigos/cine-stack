@@ -15,7 +15,7 @@ If you encounter a "cacheManager.caching is not a function" error, verify that:
 ## API Endpoints
 
 The service exposes several endpoints for interacting with movie data:
-
+    
 ### Movies
 
 - `GET /movies/discover?genres=<genre_ids>` - Discover movies by genre IDs

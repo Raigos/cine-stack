@@ -1,47 +1,55 @@
-import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Link from '@mui/material/Link'
-import ProTip from '@/components/ProTip'
-import { GenreSelector } from '@/components/GenreSelector'
+import { Genre, TMDBMovieResponse } from '@cine-stack/shared/src'
+import CssBaseline from '@mui/material/CssBaseline'
+import { useDispatch, useSelector } from 'react-redux'
 
-function Copyright() {
-  return (
-    <Typography
-      variant="body2"
-      align="center"
-      sx={{
-        color: 'text.secondary',
-      }}
-    >
-      {'Copyright © '}
-      <Link
-        color="inherit"
-        href="https://mui.com/"
-      >
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}.
-    </Typography>
-  )
-}
+import { Content, Results, SearchCard } from '@/components'
+import { searchCompleted, changePage, changeGenres, setShouldSearch } from '@/services/searchReducer'
+import { RootState } from '@/store/store'
+
+import { GridContainer, MainStack, StyledColorModeSelect } from './styles/index'
+
 
 export default function Index() {
-  return (
-    <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
-        <Typography
-          variant="h4"
-          component="h1"
-          sx={{ mb: 2 }}
-        >
-          Material UI Vite.js example in TypeScript
-        </Typography>
+  const dispatch = useDispatch()
+  const { hasSearched, currentPage, selectedGenres, searchResults, shouldSearch } = useSelector((state: RootState) => state.movieSearch)
 
-        <GenreSelector />
-        <ProTip />
-        <Copyright />
-      </Box>
-    </Container>
+  const handleSearchComplete = (results: TMDBMovieResponse, page: number) => {
+    dispatch(searchCompleted({ results, page }))
+  }
+
+  const handlePageChange = (newPage: number) => {
+    dispatch(changePage(newPage))
+  }
+
+  const handleGenreChange = (newGenres: Genre[]) => {
+    dispatch(changeGenres(newGenres))
+  }
+
+  return (
+    <>
+      <CssBaseline enableColorScheme />
+      <StyledColorModeSelect />
+      <MainStack direction="column">
+        <GridContainer maxWidth="lg">
+          {hasSearched ? (
+            <Results
+              onPageChange={handlePageChange}
+              results={searchResults}
+              selectedGenres={selectedGenres}
+            />
+          ) : (
+            <Content />
+          )}
+          <SearchCard
+            onSearchComplete={handleSearchComplete}
+            currentPage={currentPage}
+            shouldSearch={shouldSearch}
+            setShouldSearch={value => dispatch(setShouldSearch(value))}
+            selectedGenres={selectedGenres}
+            onGenreChange={handleGenreChange}
+          />
+        </GridContainer>
+      </MainStack>
+    </>
   )
 }

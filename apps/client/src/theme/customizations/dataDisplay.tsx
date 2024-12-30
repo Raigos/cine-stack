@@ -7,7 +7,6 @@ import { typographyClasses } from '@mui/material/Typography'
 
 import { gray, red, green } from '../themePrimitives'
 
-
 export const dataDisplayCustomizations: Components<Theme> = {
   MuiList: {
     styleOverrides: {

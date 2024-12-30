@@ -11,7 +11,6 @@ import { colorSchemes, typography, shadows, shape } from './themePrimitives'
 
 import type { ThemeOptions } from '@mui/material/styles'
 
-
 interface AppThemeProps {
   children: React.ReactNode
   disableCustomTheme?: boolean

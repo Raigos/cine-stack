@@ -9,7 +9,6 @@ import { toggleButtonGroupClasses } from '@mui/material/ToggleButtonGroup'
 
 import { gray, brand } from '../themePrimitives'
 
-
 export const inputsCustomizations: Components<Theme> = {
   MuiButtonBase: {
     defaultProps: {

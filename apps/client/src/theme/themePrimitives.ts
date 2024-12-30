@@ -1,6 +1,5 @@
 import { createTheme, alpha, PaletteMode, Shadows } from '@mui/material/styles'
 
-
 declare module '@mui/material/Paper' {
   interface PaperPropsVariantOverrides {
     highlighted: true

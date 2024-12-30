@@ -4,13 +4,15 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import importPlugin from 'eslint-plugin-import'
+import prettier from 'eslint-config-prettier'
 
 export default tseslint.config(
     { ignores: ['**/dist/**'] },
     {
         extends: [
             js.configs.recommended,
-            ...tseslint.configs.recommended
+            ...tseslint.configs.recommended,
+            prettier
         ],
         files: ['**/*.{ts,tsx}'],
         languageOptions: {
@@ -68,7 +70,6 @@ export default tseslint.config(
                     'caseInsensitive': true
                 }
             }],
-            'import/newline-after-import': ['error', { 'count': 2 }]
         },
     },
 )

@@ -3,6 +3,8 @@ import React from 'react'
 import { Genre, TMDBMovieResponse } from '@cine-stack/shared/src'
 import { Typography, Pagination, Stack } from '@mui/material'
 
+import { filterMoviesByGenres } from '@/hooks/useFilteredMovies'
+
 import { MovieCard } from './Card'
 import { EmptyState } from './EmptyState'
 import { Logo } from './Logo'
@@ -26,8 +28,7 @@ export function Results({ results, onPageChange, selectedGenres }: MovieResultsP
 
   let filteredCount = results.total_results
   if (selectedGenres.length > 0) {
-    const filteredResults = results.results.filter(movie => selectedGenres.every(genre => movie.genre_ids.includes(genre.id)))
-    filteredCount = filteredResults.length
+    filteredCount = filterMoviesByGenres(results.results, selectedGenres).totalCount
   }
 
   return (

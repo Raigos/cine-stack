@@ -6,12 +6,11 @@ import { RouterProvider } from 'react-router-dom'
 
 import { router } from './router'
 import { store } from './store/store'
+import AppTheme from './theme/AppTheme'
 
 import '@fontsource/roboto/400.css' // Regular weight
 import '@fontsource/roboto/500.css' // Medium weight
 import '@fontsource/roboto/700.css' // Bold weight
-
-import AppTheme from './theme/AppTheme'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

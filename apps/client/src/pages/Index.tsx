@@ -1,37 +1,33 @@
 import React, { useRef } from 'react'
 
-import { Genre, TMDBMovieResponse } from '@cine-stack/shared/src'
+import { Genre, Movie, TMDBMovieResponse } from '@cine-stack/shared/src'
 import CssBaseline from '@mui/material/CssBaseline'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Content, Results, SearchCard } from '@/components'
-import { searchCompleted, changePage, changeGenres, setShouldSearch } from '@/store/reducer/searchReducer'
+import { searchCompleted, changePage, changeGenres } from '@/store/reducer/searchReducer'
 import { RootState } from '@/store/store'
 
 import { GridContainer, MainStack, StyledColorModeSelect } from './styles/index'
 
-export default function Index(): React.ReactNode {
+type ExtendedTMDBResponse = TMDBMovieResponse & { allFilteredResults?: Movie[] }
+
+export default function Index(): React.ReactElement {
   const dispatch = useDispatch()
-  const { hasSearched, currentPage, selectedGenres, searchResults, shouldSearch } = useSelector((state: RootState) => state.movieSearch)
+  const { hasSearched, selectedGenres, searchResults } = useSelector(({ movieSearch }: RootState) => movieSearch)
   const resultsRef = useRef<HTMLDivElement>(null)
 
-  const handleSearchUpdate = (results: TMDBMovieResponse, page: number) => {
-    dispatch(searchCompleted({ results, page }))
-
-    setTimeout(() => {
-      resultsRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
-    }, 100)
+  const scrollToResults = () => {
+    resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const handlePageChange = (newPage: number) => {
-    dispatch(changePage(newPage))
-  }
-
-  const handleGenreChange = (newGenres: Genre[]) => {
-    dispatch(changeGenres(newGenres))
+  const handlers = {
+    onSearchUpdate: (results: ExtendedTMDBResponse) => {
+      dispatch(searchCompleted({ results, page: 1 }))
+      setTimeout(scrollToResults, 100)
+    },
+    onPageChange: (page: number) => dispatch(changePage(page)),
+    onGenreChange: (genres: Genre[]) => dispatch(changeGenres(genres)),
   }
 
   return (
@@ -43,21 +39,18 @@ export default function Index(): React.ReactNode {
           <div ref={resultsRef}>
             {hasSearched ? (
               <Results
-                onPageChange={handlePageChange}
                 results={searchResults}
                 selectedGenres={selectedGenres}
+                onPageChange={handlers.onPageChange}
               />
             ) : (
               <Content />
             )}
           </div>
           <SearchCard
-            onSearchUpdate={handleSearchUpdate}
-            currentPage={currentPage}
-            shouldSearch={shouldSearch}
-            setShouldSearch={value => dispatch(setShouldSearch(value))}
             selectedGenres={selectedGenres}
-            onGenreChange={handleGenreChange}
+            onSearchUpdate={handlers.onSearchUpdate}
+            onGenreChange={handlers.onGenreChange}
           />
         </GridContainer>
       </MainStack>

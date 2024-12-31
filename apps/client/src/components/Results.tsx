@@ -1,9 +1,7 @@
 import React from 'react'
 
-import { Genre, TMDBMovieResponse } from '@cine-stack/shared/src'
+import { Genre, Movie, TMDBMovieResponse } from '@cine-stack/shared/src'
 import { Typography, Pagination, Stack } from '@mui/material'
-
-import { filterMoviesByGenres } from '@/hooks/useFilteredMovies'
 
 import { MovieCard } from './Card'
 import { EmptyState } from './EmptyState'
@@ -12,7 +10,7 @@ import { CardContainer, LogoContainer } from './styles/ResultStyles'
 
 interface MovieResultsProps {
   onPageChange: (page: number) => void
-  results: TMDBMovieResponse | null
+  results: (TMDBMovieResponse & { allFilteredResults?: Movie[] }) | null
   selectedGenres: Genre[]
 }
 
@@ -25,10 +23,7 @@ export function Results({ results, onPageChange, selectedGenres }: MovieResultsP
     return <EmptyState />
   }
 
-  let filteredCount = results.total_results
-  if (selectedGenres.length > 0) {
-    filteredCount = filterMoviesByGenres(results.results, selectedGenres).totalCount
-  }
+  const totalCount = selectedGenres.length > 0 && results.allFilteredResults ? results.allFilteredResults.length : results.total_results
 
   return (
     <CardContainer>
@@ -40,7 +35,7 @@ export function Results({ results, onPageChange, selectedGenres }: MovieResultsP
         variant="h4"
         sx={{ lineHeight: 1 }}
       >
-        Found {filteredCount} {selectedGenres.length > 0 ? 'matching ' : ''}movies
+        Found {totalCount} {selectedGenres.length > 0 ? 'matching ' : ''}movies
       </Typography>
 
       <Stack spacing={2}>

@@ -73,8 +73,8 @@ export const inputsCustomizations: Components<Theme> = {
                 color: 'black',
                 backgroundColor: gray[50],
                 backgroundImage: `linear-gradient(to bottom, ${gray[100]}, ${gray[50]})`,
-                boxShadow: 'inset 0 -1px 0  hsl(220, 30%, 80%)',
-                border: `1px solid ${gray[50]}`,
+                boxShadow: `none`,
+                border: 0,
                 '&:hover': {
                   backgroundImage: 'none',
                   backgroundColor: gray[300],

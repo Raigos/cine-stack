@@ -14,8 +14,6 @@ interface MovieResultsProps {
   selectedGenres: Genre[]
 }
 
-const DISPLAY_PER_PAGE = 5
-
 export function Results({ results, onPageChange, selectedGenres }: MovieResultsProps): React.ReactElement {
   const handlePageChange = (_event: React.ChangeEvent<unknown>, newPage: number) => {
     onPageChange(newPage)
@@ -26,7 +24,11 @@ export function Results({ results, onPageChange, selectedGenres }: MovieResultsP
     return <EmptyState />
   }
 
-  const displayedMovies = results.results.slice(0, DISPLAY_PER_PAGE)
+  let filteredCount = results.total_results
+  if (selectedGenres.length > 0) {
+    const filteredResults = results.results.filter(movie => selectedGenres.every(genre => movie.genre_ids.includes(genre.id)))
+    filteredCount = filteredResults.length
+  }
 
   return (
     <CardContainer>
@@ -38,11 +40,11 @@ export function Results({ results, onPageChange, selectedGenres }: MovieResultsP
         variant="h4"
         sx={{ lineHeight: 1 }}
       >
-        Found {results.total_results} {selectedGenres.length > 0 ? 'matching ' : ''}movies
+        Found {filteredCount} {selectedGenres.length > 0 ? 'matching ' : ''}movies
       </Typography>
 
       <Stack spacing={2}>
-        {displayedMovies.map(movie => (
+        {results.results.map(movie => (
           <MovieCard
             key={movie.id}
             movie={movie}

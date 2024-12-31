@@ -1,16 +1,15 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { GenreNames } from '@cine-stack/shared/src'
+import { Genre } from '@cine-stack/shared/src'
+import { createApi } from '@reduxjs/toolkit/query/react'
 
-const WRAPPER_PORT = import.meta.env.WRAPPER_PORT || 3000
-
-const baseUrl = `http://localhost:${WRAPPER_PORT}`
+import { baseQueryWithConfig } from './baseApi'
 
 export const genresApi = createApi({
   reducerPath: 'genresApi',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: baseQueryWithConfig,
   endpoints: builder => ({
-    getGenres: builder.query<GenreNames[], void>({
+    getGenres: builder.query<Genre[], void>({
       query: () => '/genres',
+      keepUnusedDataFor: 24 * 3600,
     }),
   }),
 })

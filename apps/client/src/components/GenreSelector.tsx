@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Genre } from '@cine-stack/shared/src'
 import { ArrowDropDown } from '@mui/icons-material'
-import { Chip, CircularProgress, SelectChangeEvent, FormHelperText, OutlinedInput } from '@mui/material'
+import { Alert, Chip, CircularProgress, SelectChangeEvent, FormHelperText, OutlinedInput } from '@mui/material'
 
 import { useGetGenresQuery } from '@/services/genres'
 
@@ -24,6 +24,10 @@ export function GenreSelector({ selectedGenres, onGenreChange }: GenreSelectorPr
 
   const hasError = Boolean(error)
   const genreList = genres || []
+
+    if (error) {
+        return <Alert severity="error">Failed to load genres. Please try again later.</Alert>
+    }
 
   return (
     <GenreSelectorContainer error={hasError}>

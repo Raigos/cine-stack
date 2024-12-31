@@ -1,84 +1,74 @@
-import { useGetGenresQuery } from '@/services/genres'
-import { FormControl, InputLabel, Select, MenuItem, Box, Chip, OutlinedInput, SelectChangeEvent, FormHelperText } from '@mui/material'
-import { useState } from 'react'
-import { GenreNames } from '@cine-stack/shared/src'
-import { CircularProgress } from '@mui/material'
+import React from 'react'
 
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
+import { Genre } from '@cine-stack/shared/src'
+import { ArrowDropDown } from '@mui/icons-material'
+import { Chip, CircularProgress, SelectChangeEvent, FormHelperText, OutlinedInput } from '@mui/material'
+
+import { useGetGenresQuery } from '@/services/genres'
+
+import { GenreSelectorContainer, GenreSelect, GenreChipsContainer, GenreMenuItem } from './styles/GenreSelectorStyles'
+
+interface GenreSelectorProps {
+  selectedGenres: Genre[]
+  onGenreChange: (genres: Genre[]) => void
 }
 
-export function GenreSelector() {
-    const [selectedGenres, setSelectedGenres] = useState<string[]>([])
-    const { data: genres, isLoading, error } = useGetGenresQuery()
+export function GenreSelector({ selectedGenres, onGenreChange }: GenreSelectorProps): React.ReactElement {
+  const { data: genres, isLoading, error } = useGetGenresQuery()
 
-    const handleChange = (event: SelectChangeEvent<typeof selectedGenres>) => {
-        const {
-            target: { value },
-        } = event
-        setSelectedGenres(typeof value === 'string' ? value.split(',') : value)
-    }
+  const handleChange = (event: SelectChangeEvent<unknown>) => {
+    const selectedIds = event.target.value as number[]
+    const selectedGenreObjects = genres?.filter(genre => selectedIds.includes(genre.id)) || []
+    onGenreChange(selectedGenreObjects)
+  }
 
-    const hasError = Boolean(error)
-    const genreList = Array.isArray(genres) ? genres : []
+  const hasError = Boolean(error)
+  const genreList = genres || []
 
-    return (
-        <FormControl
-            sx={{ width: 300 }}
-            error={hasError}
-        >
-            <InputLabel id="genre-multiple-chip-label">Genres</InputLabel>
-            <Select
-                labelId="genre-multiple-chip-label"
-                id="genre-multiple-chip"
-                multiple
-                value={selectedGenres}
-                onChange={handleChange}
-                input={
-                    <OutlinedInput
-                        id="select-multiple-chip"
-                        label="Genres"
-                    />
-                }
-                renderValue={selected => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                        {selected.map(value => (
-                            <Chip
-                                key={value}
-                                label={value}
-                            />
-                        ))}
-                    </Box>
-                )}
-                MenuProps={MenuProps}
+  return (
+    <GenreSelectorContainer error={hasError}>
+      <GenreSelect
+        labelId="genre-multiple-chip-label"
+        id="genre-multiple-chip"
+        multiple
+        value={selectedGenres.map(genre => genre.id)}
+        onChange={handleChange}
+        fullWidth
+        IconComponent={ArrowDropDown}
+        input={<OutlinedInput />}
+        renderValue={() => (
+          <GenreChipsContainer>
+            {selectedGenres.map(genre => (
+              <Chip
+                key={genre.id}
+                label={genre.name}
+                size="small"
+              />
+            ))}
+          </GenreChipsContainer>
+        )}
+      >
+        {isLoading ? (
+          <GenreMenuItem
+            disabled
+            key="loading"
+            className="loading"
+          >
+            <CircularProgress size={20} />
+            Loading genres...
+          </GenreMenuItem>
+        ) : (
+          genreList.map(genre => (
+            <GenreMenuItem
+              key={genre.id}
+              value={genre.id}
             >
-                {isLoading ? (
-                    <MenuItem disabled>
-                        <CircularProgress
-                            size={20}
-                            sx={{ mr: 2 }}
-                        />
-                        Loading genres...
-                    </MenuItem>
-                ) : (
-                    genreList.map((genre: GenreNames, index: number) => (
-                        <MenuItem
-                            key={`genre-${genre}-${index}`}
-                            value={genre}
-                        >
-                            {genre}
-                        </MenuItem>
-                    ))
-                )}
-            </Select>
-            {error && <FormHelperText>Problem fetching genres!</FormHelperText>}
-        </FormControl>
-    )
+              {genre.name}
+            </GenreMenuItem>
+          ))
+        )}
+      </GenreSelect>
+      {error && <FormHelperText>Problem fetching genres!</FormHelperText>}
+    </GenreSelectorContainer>
+  )
 }

@@ -19,7 +19,6 @@ interface MovieResultsProps {
 export function Results({ results, onPageChange, selectedGenres }: MovieResultsProps): React.ReactElement {
   const handlePageChange = (_event: React.ChangeEvent<unknown>, newPage: number) => {
     onPageChange(newPage)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   if (!results || results.results.length === 0) {

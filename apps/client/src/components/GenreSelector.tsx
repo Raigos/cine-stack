@@ -25,9 +25,9 @@ export function GenreSelector({ selectedGenres, onGenreChange }: GenreSelectorPr
   const hasError = Boolean(error)
   const genreList = genres || []
 
-    if (error) {
-        return <Alert severity="error">Failed to load genres. Please try again later.</Alert>
-    }
+  if (error) {
+    return <Alert severity="error">Failed to load genres. Please try again later.</Alert>
+  }
 
   return (
     <GenreSelectorContainer error={hasError}>

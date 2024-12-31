@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Content, Results, SearchCard } from '@/components'
-import { searchCompleted, changePage, changeGenres, setShouldSearch } from '@/services/searchReducer'
+import { searchCompleted, changePage, changeGenres, setShouldSearch } from '@/store/reducer/searchReducer'
 import { RootState } from '@/store/store'
 
 import { GridContainer, MainStack, StyledColorModeSelect } from './styles/index'

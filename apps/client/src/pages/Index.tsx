@@ -1,3 +1,5 @@
+import React, { useRef } from 'react'
+
 import { Genre, TMDBMovieResponse } from '@cine-stack/shared/src'
 import CssBaseline from '@mui/material/CssBaseline'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,12 +10,20 @@ import { RootState } from '@/store/store'
 
 import { GridContainer, MainStack, StyledColorModeSelect } from './styles/index'
 
-export default function Index() {
+export default function Index(): React.ReactNode {
   const dispatch = useDispatch()
   const { hasSearched, currentPage, selectedGenres, searchResults, shouldSearch } = useSelector((state: RootState) => state.movieSearch)
+  const resultsRef = useRef<HTMLDivElement>(null)
 
-  const handleSearchComplete = (results: TMDBMovieResponse, page: number) => {
+  const handleSearchUpdate = (results: TMDBMovieResponse, page: number) => {
     dispatch(searchCompleted({ results, page }))
+
+    setTimeout(() => {
+      resultsRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }, 100)
   }
 
   const handlePageChange = (newPage: number) => {
@@ -30,17 +40,19 @@ export default function Index() {
       <StyledColorModeSelect />
       <MainStack direction="column">
         <GridContainer maxWidth="lg">
-          {hasSearched ? (
-            <Results
-              onPageChange={handlePageChange}
-              results={searchResults}
-              selectedGenres={selectedGenres}
-            />
-          ) : (
-            <Content />
-          )}
+          <div ref={resultsRef}>
+            {hasSearched ? (
+              <Results
+                onPageChange={handlePageChange}
+                results={searchResults}
+                selectedGenres={selectedGenres}
+              />
+            ) : (
+              <Content />
+            )}
+          </div>
           <SearchCard
-            onSearchComplete={handleSearchComplete}
+            onSearchUpdate={handleSearchUpdate}
             currentPage={currentPage}
             shouldSearch={shouldSearch}
             setShouldSearch={value => dispatch(setShouldSearch(value))}

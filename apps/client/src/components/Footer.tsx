@@ -11,7 +11,6 @@ export const Footer = (): React.ReactElement => {
     <StyledFooterContainer
       variant="outlined"
       component="footer"
-      component="footer"
     >
       <StyledFooterContent maxWidth="lg">
         <StyledTMDBSection>

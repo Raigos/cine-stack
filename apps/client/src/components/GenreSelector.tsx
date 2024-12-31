@@ -32,8 +32,6 @@ export function GenreSelector({ selectedGenres, onGenreChange }: GenreSelectorPr
   return (
     <GenreSelectorContainer error={hasError}>
       <GenreSelect
-        labelId="genre-multiple-chip-label"
-        id="genre-multiple-chip"
         multiple
         value={selectedGenres.map(genre => genre.id)}
         onChange={handleChange}

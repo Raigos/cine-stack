@@ -35,18 +35,19 @@ export default function Index(): React.ReactElement {
       <CssBaseline enableColorScheme />
       <StyledColorModeSelect />
       <MainStack direction="column">
-        <GridContainer maxWidth="lg">
-          <div ref={resultsRef}>
-            {hasSearched ? (
-              <Results
-                results={searchResults}
-                selectedGenres={selectedGenres}
-                onPageChange={handlers.onPageChange}
-              />
-            ) : (
-              <Content />
-            )}
-          </div>
+        <GridContainer
+          maxWidth="lg"
+          ref={resultsRef}
+        >
+          {hasSearched ? (
+            <Results
+              results={searchResults}
+              selectedGenres={selectedGenres}
+              onPageChange={handlers.onPageChange}
+            />
+          ) : (
+            <Content />
+          )}
           <SearchCard
             selectedGenres={selectedGenres}
             onSearchUpdate={handlers.onSearchUpdate}

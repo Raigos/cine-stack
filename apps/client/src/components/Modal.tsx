@@ -41,7 +41,6 @@ export const MovieModal = ({ movie, open, onClose }: MovieModalProps): React.Rea
           <Typography
             variant="h5"
             component="h2"
-            id="movie-modal-title"
           >
             {movie.title}
           </Typography>
@@ -71,7 +70,6 @@ export const MovieModal = ({ movie, open, onClose }: MovieModalProps): React.Rea
             <Description
               variant="body1"
               color="text.secondary"
-              id="movie-modal-description"
             >
               {movie.overview}
             </Description>

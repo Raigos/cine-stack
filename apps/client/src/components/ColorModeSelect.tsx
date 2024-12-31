@@ -9,14 +9,14 @@ export function ColorModeSelect(props: SelectProps) {
   if (!mode) return null
 
   return (
-      <Select
-          value={mode}
-          onChange={(event) => setMode(event.target.value as ColorMode)}
-          {...props}
-      >
-        <MenuItem value="system">System</MenuItem>
-        <MenuItem value="light">Light</MenuItem>
-        <MenuItem value="dark">Dark</MenuItem>
-      </Select>
+    <Select
+      value={mode}
+      onChange={event => setMode(event.target.value as ColorMode)}
+      {...props}
+    >
+      <MenuItem value="system">System</MenuItem>
+      <MenuItem value="light">Light</MenuItem>
+      <MenuItem value="dark">Dark</MenuItem>
+    </Select>
   )
 }

@@ -10,7 +10,10 @@ import { RootState } from '@/store/store'
 
 import { GridContainer, MainStack, StyledColorModeSelect } from './styles/index'
 
-type ExtendedTMDBResponse = TMDBMovieResponse & { allFilteredResults?: Movie[] }
+type ExtendedTMDBResponse = TMDBMovieResponse & {
+  allFilteredResults?: Movie[]
+  allResults: Movie[]
+}
 
 export default function Index(): React.ReactElement {
   const dispatch = useDispatch()
@@ -23,7 +26,7 @@ export default function Index(): React.ReactElement {
 
   const handlers = {
     onSearchUpdate: (results: ExtendedTMDBResponse) => {
-      dispatch(searchCompleted({ results, page: 1 }))
+      dispatch(searchCompleted({ results }))
       setTimeout(scrollToResults, 100)
     },
     onPageChange: (page: number) => dispatch(changePage(page)),

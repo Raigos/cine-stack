@@ -7,6 +7,9 @@ export const CardContainer = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2),
   background: 'none',
   backgroundColor: 'transparent',
+  [theme.breakpoints.up('lg')]: {
+    minHeight: theme.spacing(96),
+  },
 })) as typeof Box
 
 export const LogoContainer = styled(Box)(({ theme }) => ({

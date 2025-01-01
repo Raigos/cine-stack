@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 
-import { Genre, TMDBMovieResponse } from '@cine-stack/shared/src'
+import { Genre, Movie, TMDBMovieResponse } from '@cine-stack/shared/src'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew'
-import { Divider, FormControl, FormLabel, Link, Typography, CircularProgress } from '@mui/material'
+import { Divider, FormControl, FormLabel, Typography, CircularProgress } from '@mui/material'
 
 import { GenreSelector } from '@/components/GenreSelector'
 import { Logo } from '@/components/Logo'
 import { SearchBar } from '@/components/SearchBar'
 import { emailBody, emailSubject } from '@/constants/email'
-import { useLazyGetMoviesQuery } from '@/services/movie'
+import { useLazyGetAllPagesQuery } from '@/services/movie'
 
 import {
   StyledCard,
@@ -20,14 +20,14 @@ import {
 } from './styles/SearchCardStyles'
 
 interface SearchCardProps {
-  onSearchUpdate: (results: TMDBMovieResponse) => void
+  onSearchUpdate: (results: TMDBMovieResponse & { allResults: Movie[] }) => void
   selectedGenres: Genre[]
   onGenreChange: (genres: Genre[]) => void
 }
 
 export function SearchCard({ onSearchUpdate, selectedGenres, onGenreChange }: SearchCardProps) {
   const [searchTerm, setSearchTerm] = useState('')
-  const [trigger, { isLoading }] = useLazyGetMoviesQuery()
+  const [trigger, { isLoading }] = useLazyGetAllPagesQuery()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -38,7 +38,6 @@ export function SearchCard({ onSearchUpdate, selectedGenres, onGenreChange }: Se
       (await trigger({
         query: searchTerm,
         genres: genreIds,
-        page: 1,
       })) || {}
 
     if (data) onSearchUpdate(data)
@@ -85,7 +84,6 @@ export function SearchCard({ onSearchUpdate, selectedGenres, onGenreChange }: Se
           type="submit"
           fullWidth
           variant="contained"
-          disabled={isLoading}
         >
           {isLoading ? (
             <>
@@ -100,17 +98,6 @@ export function SearchCard({ onSearchUpdate, selectedGenres, onGenreChange }: Se
           )}
         </StyledSearchButton>
       </StyledForm>
-
-      <Typography sx={{ textAlign: 'center' }}>
-        Don&apos;t want to search? Try{' '}
-        <Link
-          href="#"
-          variant="body2"
-          sx={{ alignSelf: 'center' }}
-        >
-          Discovering
-        </Link>
-      </Typography>
 
       <Divider>Website by</Divider>
       <StyledAuthorSection onClick={openContact}>

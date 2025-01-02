@@ -2,7 +2,6 @@
   "name": "@cine-stack/shared",
   "version": "1.0.0",
   "description": "Shared utilities, types for the cine-stack application.",
-  "main": "index.js",
   "private": true,
   "author": "Raigo Tuulik",
   "license": "CC-BY-NC-4.0",

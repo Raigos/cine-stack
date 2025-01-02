@@ -1,8 +1,8 @@
 services:
   frontend:
     build:
-      context: ./apps/client
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/client/Dockerfile
     ports:
       - "5173:5173"
     depends_on:
@@ -10,8 +10,8 @@ services:
 
   backend:
     build:
-      context: ./apps/wrapper
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/wrapper/Dockerfile
     ports:
       - "3001:3000"
     env_file:

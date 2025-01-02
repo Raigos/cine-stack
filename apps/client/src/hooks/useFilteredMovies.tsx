@@ -1,4 +1,4 @@
-import { Movie, Genre } from '@cine-stack/shared/dist'
+import { Movie, Genre } from '@cine-stack/shared/src'
 
 interface FilterOptions {
   page?: number

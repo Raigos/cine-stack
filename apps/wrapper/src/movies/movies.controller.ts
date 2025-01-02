@@ -1,8 +1,7 @@
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common'
 import { MoviesService } from './movies.service'
 import { MovieSearchBaseParams } from '../types'
-import { MovieDiscoverParams } from '@cine-stack/shared/src/'
-import { TMDBMovieResponse } from '@cine-stack/shared/dist'
+import { MovieDiscoverParams, TMDBMovieResponse } from '@cine-stack/shared/src/'
 
 @Controller('movies')
 export class MoviesController {

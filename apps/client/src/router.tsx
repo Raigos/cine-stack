@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import SignInSide from '@/pages/index'
+import SignInSide from '@/pages/SignInSide'
 
 import Layout from './Layout'
 

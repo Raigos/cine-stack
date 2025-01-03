@@ -23,11 +23,7 @@ docker compose build
 docker compose up
 ```  
 
-#### Later  you don't have to build and can just
-
-```bash  
-docker compose up
-```
+Visit  http://localhost:5173/ after compose up
 
 ### Applications (`apps/`)
 

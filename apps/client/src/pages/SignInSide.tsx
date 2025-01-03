@@ -15,7 +15,7 @@ type ExtendedTMDBResponse = TMDBMovieResponse & {
   allResults: Movie[]
 }
 
-export default function Index(): React.ReactElement {
+export default function SignInSide(): React.ReactElement {
   const dispatch = useDispatch()
   const { hasSearched, selectedGenres, searchResults } = useSelector(({ movieSearch }: RootState) => movieSearch)
   const resultsRef = useRef<HTMLDivElement>(null)

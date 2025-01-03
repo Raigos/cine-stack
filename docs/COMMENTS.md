@@ -20,8 +20,7 @@
 - I think I finished with the wrapper next up the client, I should have added swagger for self documenting endpoints.. oh well maybe after the client
 - I got home late and didn't want to work on the client yet, but I decided to take a look at the wrapper to see if I could find some problems and indeed I did
 - I made sure to use postman before working on the client to make sure all the responses are  working
-- 
-- 
+- With Christmas, working was a hectic. but finished the project
 
 ## Project Structure
 

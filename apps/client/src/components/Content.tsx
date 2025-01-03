@@ -1,6 +1,7 @@
+import React from 'react'
+
 import { Code as CodeIcon, Api as ApiIcon, AccountTree as AccountTreeIcon, AutoStories as AutoStoriesIcon } from '@mui/icons-material'
 import { Box, Typography } from '@mui/material'
-import React from 'React'
 
 import { Logo } from './Logo'
 import {

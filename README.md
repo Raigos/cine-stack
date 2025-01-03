@@ -18,6 +18,14 @@ To run the project with Docker
 docker compose build
 ```
 
+Add the .env file to the root of the project.
+It should contain
+```
+TMDB_ACCESS_TOKEN=<token value>
+TMDB_BASE_URL=https://api.themoviedb.org/3
+WRAPPER_PORT=3000
+```
+
 ```bash  
 # Start the container 
 docker compose up

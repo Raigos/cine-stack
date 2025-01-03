@@ -1,23 +1,26 @@
 FROM node:22.12.0
 
-# Accept Railway's environment variables at build time
-ARG PORT
-ARG RAILWAY_ENVIRONMENT
-ARG RAILWAY_SERVICE_NAME
-
 WORKDIR /app
 
+# Install pnpm using npm with specific version
 RUN npm install -g pnpm@9.15.0
 
+# Copy workspace config first
 COPY pnpm-workspace.yaml ./
 COPY package.json ./
 COPY packages/shared/ ./packages/shared/
+
+# Copy the entire client app directory
 COPY apps/client/ ./apps/client/
 
+# Install dependencies
 RUN pnpm install
 
+# Set working directory to client app
 WORKDIR /app/apps/client
 
-EXPOSE ${PORT:-5173}
+# Vite's default port
+EXPOSE 5173
 
-CMD ["sh", "-c", "pnpm run dev --host 0.0.0.0 --port ${PORT:-5173}"]
+# Start development server
+CMD ["pnpm", "dev", "--host", "0.0.0.0"]
